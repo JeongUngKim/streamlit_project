@@ -25,7 +25,7 @@ def team(team_name) :
     st.dataframe(df_games_home)
 
     # 차트의 한글 표시
-    font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
+    font_name = font_manager.FontProperties(fname="malgun.ttf").get_name()
     rc('font', family=font_name)
     if st.checkbox('홈 평균') :
         fig1 = plt.figure()
