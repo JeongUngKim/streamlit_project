@@ -10,7 +10,6 @@ def main() :
        'POR', 'SAC', 'SAS', 'OKC', 'TOR', 'UTA', 'MEM', 'WAS', 'DET',
        'CHA', 'CLE', 'GSW']
     team_name = st.sidebar.selectbox('team',team_name_list)
-    print(team_name)
     if team_name is not None :
         team(team_name)
     player_name = st.sidebar.selectbox('player info',[''])
