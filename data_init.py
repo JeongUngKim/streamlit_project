@@ -18,7 +18,7 @@ df_games_detail = df_games_detail.loc[:,['GAME_ID', 'TEAM_ID','PLAYER_ID','PLAYE
                        'DREB', 'REB', 'AST', 'STL', 'BLK','TO']]
 rename ={ 'GAME_DATE_EST' : '경기날짜' ,'GAME_ID':'경기ID', 'HOME_TEAM_ID':'홈팀ID','PTS_home':'홈팀점수','AST_home':'홈팀어시','REB_home':'홈팀리바운드','TEAM_ID_away':'어웨이팀ID','PTS_away':'어웨이팀점수','AST_away':'어웨이팀어시','REB_away':'어웨이팀리바운드','HOME_TEAM_WINS':'홈팀승리여부'  }
 df_games = df_games.rename(columns=rename)
-df_gmaes=df_games.fillna(0)
+df_games=df_games.fillna(0)
 
 rename_detail = { 'GAME_ID':'경기ID','TEAM_ID':'팀ID','PLAYER_ID':'선수ID','PLAYER_NAME':'선수명',
                     'START_POSITION':'포지션',
@@ -34,3 +34,8 @@ rename_team = {'TEAM_ID':'팀ID','ABBREVIATION':'팀약어','YEARFOUNDED':'팀�
                 'CITY':'연고지','ARENA':'홈구장'}
 df_teams = df_teams.rename(columns=rename_team)
 
+# 가공을 편하게 하기위해 df_games에 홈팀명,어웨이팀명 추가
+df_teams_home = df_teams.rename(columns={'팀ID':'홈팀ID'})
+new_data = pd.merge(df_games,df_teams_home).iloc[:,:-3].rename(columns={'팀약어':'홈팀'})
+df_teams_away = df_teams.rename(columns={'팀ID':'어웨이팀ID'})
+df_games=pd.merge(new_data,df_teams_away).iloc[:,:-3].rename(columns={'팀약어':'어웨이팀'})
