@@ -4,9 +4,14 @@ import team_url as tu
 import data_init
 import matplotlib.pyplot as plt
 import numpy as np
+import platform
 from matplotlib import font_manager, rc
 
 def team(team_name) :
+    plt.rcParams['axes.unicode_minus'] = False
+    if platform.system() == 'Linux':
+        rc('font', family='NanumGothic')
+
     # 팀의 데이터를 읽어온다.
     df_teams = data_init.df_teams
     df_games = data_init.df_games
@@ -38,9 +43,7 @@ def team(team_name) :
     
     df_games_home = df_games.loc[ (df_games['홈팀ID']==team_id) & (start_date<=df_games['경기날짜']) & (df_games['경기날짜']<=end_date),:]
     st.dataframe(df_games_home.iloc[:,[11,12,0,3,4,5,7,8,9]])
-    # 차트의 표시
-    font_name = font_manager.FontProperties(fname="malgun.ttf").get_name()
-    rc('font', family=font_name)
+    
     if st.checkbox('홈 성적 자세히보기') :
         st.subheader('최근 대결 성적')
         fig1 = plt.figure()

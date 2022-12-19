@@ -5,14 +5,12 @@ from player import player
 import matplotlib.pyplot as plt
 import platform
 from matplotlib import font_manager, rc
-plt.rcParams['axes.unicode_minus'] = False
-if platform.system() == 'Linux':
-    rc('font', family='NanumGothic')
 
-def main() : 
-
-
-
+def main() :
+    plt.rcParams['axes.unicode_minus'] = False
+    if platform.system() == 'Linux':
+        rc('font', family='NanumGothic')
+        
     team_name_list = ['(팀을 선택해주세요)','ATL', 'BOS', 'NOP', 'CHI', 'DAL', 'DEN', 'HOU', 'LAC', 'LAL',
        'MIA', 'MIL', 'MIN', 'BKN', 'NYK', 'ORL', 'IND', 'PHI', 'PHX',
        'POR', 'SAC', 'SAS', 'OKC', 'TOR', 'UTA', 'MEM', 'WAS', 'DET',
