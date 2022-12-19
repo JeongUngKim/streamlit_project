@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import platform
 from matplotlib import font_manager, rc
+import plotly.express as px
 
 def team(team_name) :
     plt.rcParams['axes.unicode_minus'] = False
@@ -26,6 +27,7 @@ def team(team_name) :
     
     # 시즌별 성적보기
     st.header('일자별 성적보기')
+
     team_id = df_teams[df_teams['팀약어'] == team_name]['팀ID'].values[0]
     st.subheader('홈 성적')
     # 시작과 끝 종료날짜를 설정하여 데이터 가져오기
@@ -45,11 +47,11 @@ def team(team_name) :
     st.dataframe(df_games_home.iloc[:,[11,12,0,3,4,5,7,8,9]])
     
     if st.checkbox('홈 성적 자세히보기') :
-        st.subheader('최근 대결 성적')
+        st.header('최근 대결 성적')
+        
         fig1 = plt.figure()
         x= np.arange(3)
         x_label = ['점수','어시','리바운드']
-        
         home_value = df_games_home.iloc[:,3:5+1].mean()
         home_value2 = df_games_home.iloc[:,7:-3].mean()
         p1=plt.bar(x,home_value,width = 0.4,color='r')
@@ -57,8 +59,23 @@ def team(team_name) :
         plt.xticks(np.arange(0.2,3+0.2,1),x_label)
         plt.legend((p1[0],p2[0]) , ('Home','Away'), fontsize = 10 )
         st.pyplot(fig1)
+        
+        #득점 데이터
+        st.subheader('득점')
+        recently_point_pig = px.bar(df_games_home,x='경기날짜',y=['홈팀점수','어웨이팀점수'],barmode='group')
+        st.plotly_chart(recently_point_pig)
+        st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
 
-        st.dataframe(df_games_home.iloc[:,[3,4,5,7,8,9]].mean())
+        #어시스트 데이터
+        st.subheader('어시스트')
+        recently_assist_pig = px.bar(df_games_home,x='경기날짜',y=['홈팀어시','어웨이팀어시'],barmode='group')
+        st.plotly_chart(recently_assist_pig)
+        #리바운드 데이터
+        st.subheader('리바운드')
+        recently_rebound_pig = px.bar(df_games_home,x='경기날짜',y=['홈팀리바운드','어웨이팀리바운드'],barmode='group')
+        st.plotly_chart(recently_rebound_pig)
+        
+
         st.subheader('역대 홈 전적비교')
         compare_home_team = st.selectbox('팀선택',team_name_list)
         print(compare_home_team+' '+team_name)
