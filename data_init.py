@@ -18,12 +18,14 @@ df_games_detail = df_games_detail.loc[:,['GAME_ID', 'TEAM_ID','PLAYER_ID','PLAYE
                        'DREB', 'REB', 'AST', 'STL', 'BLK','TO']]
 rename ={ 'GAME_DATE_EST' : '경기날짜' ,'GAME_ID':'경기ID', 'HOME_TEAM_ID':'홈팀ID','PTS_home':'홈팀점수','AST_home':'홈팀어시','REB_home':'홈팀리바운드','TEAM_ID_away':'어웨이팀ID','PTS_away':'어웨이팀점수','AST_away':'어웨이팀어시','REB_away':'어웨이팀리바운드','HOME_TEAM_WINS':'홈팀승리여부'  }
 df_games = df_games.rename(columns=rename)
+df_gmaes=df_games.fillna(0)
 
 rename_detail = { 'GAME_ID':'경기ID','TEAM_ID':'팀ID','PLAYER_ID':'선수ID','PLAYER_NAME':'선수명',
                     'START_POSITION':'포지션',
     'COMMENT':'출전시간','MIN':'2점슛', 'FG_PCT':'3점슛', 'FG3_PCT':'자유투',
     'DREB':'리바운드','REB':'어시스트','AST':'가로채기','STL':'블락','TO':'턴오버수'}
 df_games_detail = df_games_detail.rename(columns=rename_detail)
+df_games_detail = df_games_detail.fillna(0)
     
 rename_playes = { 'PLAYER_NAME':'선수명','TEAM_ID':'팀ID','PLAYER_ID':'선수ID','SEASON':'시즌' }
 df_players=df_players.rename(columns=rename_playes)
@@ -31,3 +33,4 @@ df_players=df_players.rename(columns=rename_playes)
 rename_team = {'TEAM_ID':'팀ID','ABBREVIATION':'팀약어','YEARFOUNDED':'팀창설해',
                 'CITY':'연고지','ARENA':'홈구장'}
 df_teams = df_teams.rename(columns=rename_team)
+
