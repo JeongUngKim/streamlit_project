@@ -58,7 +58,8 @@ def team(team_name) :
         st.dataframe(df_games_home.iloc[:,[3,4,5,7,8,9]].mean())
         st.subheader('역대 홈 전적비교')
         compare_home_team = st.selectbox('팀선택',team_name_list)
-        if compare_home_team != '' : 
+        print(compare_home_team+' '+team_name)
+        if compare_home_team != '' and compare_home_team != team_name : 
             compare_team_id_home = df_teams[df_teams['팀약어'] == compare_home_team]['팀ID'].values[0]
             data_home = df_games[(df_games['홈팀ID'] ==team_id) & (df_games['어웨이팀ID'] ==compare_team_id_home)]
             st.dataframe(data_home.iloc[:,[11,0,3,4,5,12,7,8,9,10]].sort_values('경기날짜',ascending=False))
@@ -88,8 +89,9 @@ def team(team_name) :
                 plt.legend(['홈','어웨이'])
                 st.pyplot(fig_home)
             else :
-                st.title('실패')
-
+                st.title('')
+        elif compare_home_team == team_name :
+            st.error('같은 팀 입니다. 다른 팀을 선택해주세요.')
         else : 
             st.error('팀을 선택해주세요')
 
@@ -121,7 +123,8 @@ def team(team_name) :
         st.dataframe(df_games_away.iloc[:,[3,4,5,7,8,9]].mean())
         st.subheader('역대 어웨이 전적비교')
         compare_away_team = st.selectbox('팀 선택',team_name_list)
-        if compare_away_team != '' : 
+       
+        if compare_away_team != '' and compare_away_team != team_name: 
             compare_team_id_away = df_teams[df_teams['팀약어'] == compare_away_team]['팀ID'].values[0]
             data_away=df_games[(df_games['홈팀ID'] ==team_id) & (df_games['어웨이팀ID'] ==compare_team_id_away)]
             st.dataframe(data_away.iloc[:,[11,0,3,4,5,12,7,8,9,10]].sort_values('경기날짜',ascending=False))
@@ -151,8 +154,9 @@ def team(team_name) :
                 plt.legend(['어웨이','홈'])
                 st.pyplot(fig_away)
             else :
-                st.title('실패')
-
+                st.title('')
+        elif compare_away_team == team_name :
+            st.error('같은 팀 입니다. 다른 팀을 선택해주세요.')
         else : 
             st.error('팀을 선택해주세요')
 
