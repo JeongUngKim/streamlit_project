@@ -21,9 +21,9 @@ df_games = df_games.rename(columns=rename)
 df_games=df_games.fillna(0)
 
 rename_detail = { 'GAME_ID':'경기ID','TEAM_ID':'팀ID','PLAYER_ID':'선수ID','PLAYER_NAME':'선수명',
-                    'START_POSITION':'포지션',
-    'COMMENT':'출전시간','MIN':'2점슛', 'FG_PCT':'3점슛', 'FG3_PCT':'자유투',
-    'DREB':'리바운드','REB':'어시스트','AST':'가로채기','STL':'블락','TO':'턴오버수'}
+                 'START_POSITION':'포지션',
+ 'COMMENT':'출전시간','MIN':'2점슛', 'FG_PCT':'3점슛', 'FG3_PCT':'자유투',
+ 'DREB':'리바운드','REB':'어시스트','AST':'가로채기','STL':'블락','BLK':'턴오버','TO':'파울'}
 df_games_detail = df_games_detail.rename(columns=rename_detail)
 df_games_detail = df_games_detail.fillna(0)
     
@@ -39,3 +39,12 @@ df_teams_home = df_teams.rename(columns={'팀ID':'홈팀ID'})
 new_data = pd.merge(df_games,df_teams_home).iloc[:,:-3].rename(columns={'팀약어':'홈팀'})
 df_teams_away = df_teams.rename(columns={'팀ID':'어웨이팀ID'})
 df_games=pd.merge(new_data,df_teams_away).iloc[:,:-3].rename(columns={'팀약어':'어웨이팀'})
+
+# 가공을 편하게 하기 위해 df_platers에 팀명 추가
+df_players=pd.merge(df_players,df_teams).iloc[:,0:4+1]
+
+# 가공을 편하게 하기 위해 df_games_detail 에 날짜 추가
+df_games_detail=pd.merge(df_games_detail,df_games).loc[:,:'경기날짜'].sort_values('경기날짜',ascending=False)
+
+# 가공을 편하게 하기위해 df_games_detail에 약어 추가
+df_games_detail = pd.merge(df_games_detail,df_teams).iloc[:,:-3]

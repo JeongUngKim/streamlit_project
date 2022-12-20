@@ -50,6 +50,7 @@ def team(team_name) :
        'CHA', 'CLE', 'GSW']
     if df_games['경기날짜'][0] < start_date :
            st.error('경기정보가 없습니다. 날짜를 조정해주세요.')
+           
     else :   
         # 홈 / 어웨이 선택
         selected = st.selectbox('홈/어웨이 선택',['홈','어웨이'])
