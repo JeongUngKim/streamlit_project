@@ -29,6 +29,8 @@ def main() :
         player_name = st.sidebar.text_input('선수명(영어로만)',max_chars=100)
         if player_name != '' :
             player(player_name)
+        elif player_name=='' :
+            st.header('선수명을 입력해주세요.')
         else :
             st.sidebar.error('선수명을 입력해주세요.')
     

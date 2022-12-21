@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import platform
 from matplotlib import font_manager, rc
+import numpy as np
+import plotly.graph_objects as go
 def player(player_name) :
     plt.rcParams['axes.unicode_minus'] = False
     if platform.system() == 'Linux':
@@ -25,6 +27,7 @@ def player(player_name) :
     st.header('선수 정보')
     # 선수명 확인
     player_list = df_players[df_players['선수명'].str.contains(player_name,case=False)]['선수명'].unique().tolist()
+    
     if len(player_list) > 1 :
        
         st.error('중복되는 선수명을 가진 선수가 있습니다. 내역을 보시고 다시 입력해주세요.')
@@ -32,6 +35,8 @@ def player(player_name) :
         st.dataframe(player)
     elif len(player_list) == 0 :
         st.error('등록된 선수가 없습니다. 다시 입력해주세요.')
+        st.subheader('등록된 선수 목록')
+        st.dataframe(pd.DataFrame({'선수명':df_players['선수명'].unique()}))
     elif len(player_list) == 1 :
         player = player_list[0]
         # 플레이어 데이터 보여주기
@@ -58,23 +63,200 @@ def player(player_name) :
                 else :
                     df_player_data_set=df_player_data[( df_player_data['경기날짜'] >= start_date ) & (df_player_data['경기날짜'] <= end_date) ]
                     
-                    multiselectbox_list = ['상세','공격지표','수비지표']
+                    multiselectbox_list = ['상세','평균','2점슛', '3점슛', '자유투', '리바운드', '어시스트', '가로채기', '블락', '턴오버', '파울']
                     selected_player_data = st.multiselect('데이터 선택',multiselectbox_list)
-                    if '상세' in selected_player_data : 
-                        st.dataframe(df_player_data_set.iloc[:,[15,16,3,4,5,6,7,8,9,10,11,12,13,14,]])
-                    if '공격지표' in selected_player_data :
-                        offense_data_date = df_player_data_set.iloc[:,[6,7,8,-2]]
-                        
-                        chart_offense_data_date = px.bar(offense_data_date,x='경기날짜',y=['2점슛','3점슛','자유투'] ,barmode='group')
-                        st.plotly_chart(chart_offense_data_date)
                     
-                    if '수비지표' in selected_player_data :
-                        defense_data_date = df_player_data_set.iloc[:,[9,10,11,12,13,14,-2]]
-                        
-                        chart_defense_data_date = px.bar(defense_data_date,x='경기날짜',y=['리바운드','어시스트','가로채기','블락','턴오버','파울'] ,barmode='group')
-                        st.plotly_chart(chart_defense_data_date)
-                    
+                    # 그 경기 선수 평균 가져오기 
+                    list_game_id = df_player_data_set['경기ID']
+                    game_player_mean = df_games_detail[df_games_detail['경기ID'].isin(list_game_id)].groupby('경기날짜').mean().iloc[:,[0,3,4,5,6,7,8,9,10,11]]
+                    game_player_mean=game_player_mean.sort_values('경기날짜',ascending=False)
+                    # end
 
+                    if '상세' in selected_player_data : 
+                        st.subheader('상세정보')
+                        st.dataframe(df_player_data_set.iloc[:,[15,16,3,4,5,6,7,8,9,10,11,12,13,14,]])
+                    if '평균' in selected_player_data :    
+                        st.subheader('평균')
+                        fig = go.Figure([ go.Bar(x=['2점슛', '3점슛', '자유투', '리바운드', '어시스트', '가로채기', '블락', '턴오버', '파울'],
+                                                y = df_player_data_set.loc[:,['2점슛', '3점슛', '자유투', '리바운드', '어시스트', '가로채기', '블락', '턴오버', '파울']].mean()  ) ])
+                        st.plotly_chart(fig)
+
+                    
+                    # 평균과 set 합치기
+                    df_player_data_set = df_player_data_set.sort_values('경기날짜',ascending=False)
+                    total_player_data = pd.merge(df_player_data_set,game_player_mean,on='경기ID')
+                    rename_columns = { '2점슛_x' : '2점슛' , '3점슛_x' : '3점슛' , '자유투_x' :'자유투',
+                                        '리바운드_x':'리바운드','어시스트_x':'어시스트', '가로채기_x' : '가로채기',
+                                        '블락_x':'블락','턴오버_x':'턴오버','파울_x':'파울','2점슛_y':'경기평균2점',
+                                        '3점슛_y':'경기평균3점','자유투_y':'경기평균자유투','리바운드_y':'경기평균리바운드',
+                                        '어시스트_y':'경기평균어시스트','가로채기_y':'경기평균가로채기','블락_y':'경기평균블락',
+                                        '턴오버_y':'경기평균턴오버','파울_y':'경기평균파울'}
+                    total_player_data = total_player_data.rename(columns=rename_columns)
+                    #수비,공격지표 설정
+                    offense_data_date = total_player_data.loc[:,['경기날짜','2점슛','3점슛','리바운드','어시스트','자유투','경기평균2점','경기평균3점','경기평균자유투','경기평균리바운드', '경기평균어시스트']]
+                    defense_data_date = total_player_data.loc[:,['경기날짜', '가로채기', '블락', '턴오버', '파울','경기평균가로채기', '경기평균블락','경기평균턴오버', '경기평균파울']]
+                    if '2점슛' in selected_player_data :
+                        
+                        #2점슛
+                        st.subheader('2점')
+                        chart_offense_data_date_2_point = px.bar(offense_data_date,x='경기날짜',y=['2점슛','경기평균2점'] ,barmode='group')
+                        st.plotly_chart(chart_offense_data_date_2_point)
+                        st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                    if '3점슛' in selected_player_data :    
+                        # 3점슛
+                        st.subheader('3점')
+                        chart_offense_data_date_3_point = px.bar(offense_data_date,x='경기날짜',y=['3점슛','경기평균3점'] ,barmode='group')
+                        st.plotly_chart(chart_offense_data_date_3_point)
+                        st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                    if '자유투' in selected_player_data :    
+                        #자유투
+                        st.subheader('자유투')
+                        chart_offense_data_date_free_point = px.bar(offense_data_date,x='경기날짜',y=['자유투','경기평균자유투'] ,barmode='group')
+                        st.plotly_chart(chart_offense_data_date_free_point)
+                        st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                    if '리바운드' in selected_player_data :    
+                         #리바
+                        st.subheader('리바운드')
+                        chart_offense_data_date_re = px.bar(offense_data_date,x='경기날짜',y=['리바운드','경기평균리바운드'] ,barmode='group')
+                        st.plotly_chart(chart_offense_data_date_re)
+                        st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                    if '어시스트' in selected_player_data :    
+                        #어시
+                        st.subheader('어시스트')
+                        chart_offense_data_date_assist = px.bar(offense_data_date,x='경기날짜',y=['어시스트','경기평균어시스트'] ,barmode='group')
+                        st.plotly_chart(chart_offense_data_date_assist)
+                        st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+
+                    if '가로채기' in selected_player_data :
+                        
+                        #가로채기
+                        st.subheader('가로채기')
+                        chart_defense_data_date_st = px.bar(defense_data_date,x='경기날짜',y=['가로채기','경기평균가로채기'] ,barmode='group')
+                        st.plotly_chart(chart_defense_data_date_st)
+                        st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                    if '블락' in selected_player_data :   
+                        #블락
+                        st.subheader('블락')
+                        chart_defense_data_date_bk = px.bar(defense_data_date,x='경기날짜',y=['블락','경기평균블락'] ,barmode='group')
+                        st.plotly_chart(chart_defense_data_date_bk)
+                        st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                    if '턴오버' in selected_player_data :       
+                        #턴오버
+                        st.subheader('턴오버')
+                        chart_defense_data_date_to = px.bar(defense_data_date,x='경기날짜',y=['턴오버','경기평균턴오버'] ,barmode='group')
+                        st.plotly_chart(chart_defense_data_date_to)
+                        st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                    if '파울' in selected_player_data :       
+                        #파울
+                        st.subheader('파울')
+                        chart_defense_data_date_p = px.bar(defense_data_date,x='경기날짜',y=['파울','경기평균파울'] ,barmode='group')
+                        st.plotly_chart(chart_defense_data_date_p)
+                        st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
         
         elif radio_status =='소속팀별' :
-            pass
+            team_list = df_player_data['팀약어'].unique()
+            choose_team =st.multiselect('팀선택',team_list)
+            if len(choose_team) < 1 :
+                st.error('팀을 선택해주세요')
+            else :
+                multiselectbox_list=st.multiselect('데이터 선택',['상세','평균','2점슛', '3점슛', '자유투', '리바운드', '어시스트', '가로채기', '블락', '턴오버', '파울'])
+
+                choose_team_player_data = df_player_data[df_player_data['팀약어'].isin(choose_team) ]
+                
+                # 그 경기 선수 평균 가져오기 
+                list_game_id = choose_team_player_data['경기ID']
+                game_player_mean = df_games_detail[df_games_detail['경기ID'].isin(list_game_id)].groupby('경기날짜').mean().iloc[:,[0,3,4,5,6,7,8,9,10,11]]
+                game_player_mean=game_player_mean.sort_values('경기날짜',ascending=False)
+                # end
+
+                #상세
+                if '상세' in multiselectbox_list : 
+                    st.subheader('상세정보')
+                    st.dataframe(choose_team_player_data.iloc[:,[15,16,3,4,5,6,7,8,9,10,11,12,13,14,]])
+                if '평균' in multiselectbox_list :    
+                    st.subheader('평균')
+                    fig = go.Figure([ go.Bar(x=['2점슛', '3점슛', '자유투', '리바운드', '어시스트', '가로채기', '블락', '턴오버', '파울'],
+                                                y = choose_team_player_data.loc[:,['2점슛', '3점슛', '자유투', '리바운드', '어시스트', '가로채기', '블락', '턴오버', '파울']].mean()  ) ])
+                    st.plotly_chart(fig)
+
+                choose_team_player_data = choose_team_player_data.sort_values('경기날짜',ascending=False)
+                
+                total_player_data = pd.merge(choose_team_player_data,game_player_mean,on='경기ID')
+                rename_columns = { '2점슛_x' : '2점슛' , '3점슛_x' : '3점슛' , '자유투_x' :'자유투',
+                                    '리바운드_x':'리바운드','어시스트_x':'어시스트', '가로채기_x' : '가로채기',
+                                    '블락_x':'블락','턴오버_x':'턴오버','파울_x':'파울','2점슛_y':'경기평균2점',
+                                    '3점슛_y':'경기평균3점','자유투_y':'경기평균자유투','리바운드_y':'경기평균리바운드',
+                                    '어시스트_y':'경기평균어시스트','가로채기_y':'경기평균가로채기','블락_y':'경기평균블락',
+                                    '턴오버_y':'경기평균턴오버','파울_y':'경기평균파울'}
+                total_player_data = total_player_data.rename(columns=rename_columns)
+
+                #수비,공격지표 설정
+                offense_data_date = total_player_data.loc[:,['경기날짜','2점슛','3점슛','리바운드','어시스트','자유투','경기평균2점','경기평균3점','경기평균자유투','경기평균리바운드', '경기평균어시스트']]
+                defense_data_date = total_player_data.loc[:,['경기날짜', '가로채기', '블락', '턴오버', '파울','경기평균가로채기', '경기평균블락','경기평균턴오버', '경기평균파울']]
+
+                if '2점슛' in multiselectbox_list :
+                        
+                    #2점슛
+                    st.subheader('2점')
+                    chart_offense_data_date_2_point = px.bar(offense_data_date,x=np.arange(offense_data_date.count()[0]),y=['2점슛','경기평균2점'] ,barmode='group',labels={'x':'경기수'})
+                    
+                    st.plotly_chart(chart_offense_data_date_2_point)
+                    st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                if '3점슛' in multiselectbox_list :    
+                    # 3점슛
+                    st.subheader('3점')
+                    chart_offense_data_date_3_point = px.bar(offense_data_date,x=np.arange(offense_data_date.count()[0]),y=['3점슛','경기평균3점'] ,barmode='group',labels={'x':'경기수'})
+                    st.plotly_chart(chart_offense_data_date_3_point)
+                    st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                if '자유투' in multiselectbox_list :    
+                    #자유투
+                    st.subheader('자유투')
+                    chart_offense_data_date_free_point = px.bar(offense_data_date,x=np.arange(offense_data_date.count()[0]),y=['자유투','경기평균자유투'] ,barmode='group',labels={'x':'경기수'})
+                    st.plotly_chart(chart_offense_data_date_free_point)
+                    st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                if '리바운드' in multiselectbox_list :    
+                        #리바
+                    st.subheader('리바운드')
+                    chart_offense_data_date_re = px.bar(offense_data_date,x=np.arange(offense_data_date.count()[0]),y=['리바운드','경기평균리바운드'] ,barmode='group',labels={'x':'경기수'})
+                    st.plotly_chart(chart_offense_data_date_re)
+                    st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                if '어시스트' in multiselectbox_list :    
+                    #어시
+                    st.subheader('어시스트')
+                    chart_offense_data_date_assist = px.bar(offense_data_date,x=np.arange(offense_data_date.count()[0]),y=['어시스트','경기평균어시스트'] ,barmode='group',labels={'x':'경기수'})
+                    st.plotly_chart(chart_offense_data_date_assist)
+                    st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+
+                if '가로채기' in multiselectbox_list :
+                    
+                    #가로채기
+                    st.subheader('가로채기')
+                    chart_defense_data_date_st = px.bar(defense_data_date,x=np.arange(offense_data_date.count()[0]),y=['가로채기','경기평균가로채기'] ,barmode='group',labels={'x':'경기수'})
+                    st.plotly_chart(chart_defense_data_date_st)
+                    st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                if '블락' in multiselectbox_list :   
+                    #블락
+                    st.subheader('블락')
+                    chart_defense_data_date_bk = px.bar(defense_data_date,x=np.arange(offense_data_date.count()[0]),y=['블락','경기평균블락'] ,barmode='group',labels={'x':'경기수'})
+                    st.plotly_chart(chart_defense_data_date_bk)
+                    st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                if '턴오버' in multiselectbox_list :       
+                    #턴오버
+                    st.subheader('턴오버')
+                    chart_defense_data_date_to = px.bar(defense_data_date,x=np.arange(offense_data_date.count()[0]),y=['턴오버','경기평균턴오버'] ,barmode='group',labels={'x':'경기수'})
+                    st.plotly_chart(chart_defense_data_date_to)
+                    st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+                if '파울' in multiselectbox_list :       
+                    #파울
+                    st.subheader('파울')
+                    chart_defense_data_date_p = px.bar(defense_data_date,x=np.arange(offense_data_date.count()[0]),y=['파울','경기평균파울'] ,barmode='group',labels={'x':'경기수'})
+                    st.plotly_chart(chart_defense_data_date_p)
+                    st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
+
+
+
+        
+                
+
+            
+
