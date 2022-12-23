@@ -32,17 +32,11 @@
 ##### - 출전시간 : 해당 선수에 경기별 출전시간
 ##### - 2점,3점,자유투,리바운드,어시 등등 : 각각 해당 선수의 스탯 
 
-## 사용환경 및 라이브러리
-##### 환경
-<img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=Windows&logoColor=white"> <img src="https://img.shields.io/badge/Amazon EC2-FF9900.svg?style=for-the-badge&logo=Amazon EC2&logoColor=white"/> <img src="https://img.shields.io/badge/Python-3776AB.svg?style=for-the-badge&logo=Python3.8&logoColor=white"/> <img src="https://img.shields.io/badge/Jupyter-F37626.svg?style=for-the-badge&logo=Jupyter&logoColor=white"/> 
-
-##### 라이브러리
-<img src="https://img.shields.io/badge/Python-3776AB.svg?style=for-the-badge&logo=Python&logoColor=white"/> <img src="https://img.shields.io/badge/Streamlit-FF4B4B.svg?style=for-the-badge&logo=Streamlit&logoColor=white"/> <img src="https://img.shields.io/badge/pandas-150458.svg?style=for-the-badge&logo=pandas&logoColor=white"/> <img src="https://img.shields.io/badge/Plotly-3F4F75.svg?style=for-the-badge&logo=Plotly&logoColor=white"/> <img src="https://img.shields.io/badge/NumPy-013243.svg?style=for-the-badge&logo=NumPy&logoColor=white"/>
----
-
 ## 프로젝트 주소
 [EC2 프로젝트 확인](http://ec2-3-39-251-194.ap-northeast-2.compute.amazonaws.com:8501/)
+
 [블로그 주소](https://mokokodevelop.tistory.com/category/%EA%B0%9C%EB%B0%9C/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8)
+
 ---
 
 ## 이미지
@@ -87,6 +81,14 @@
 ###### - 작동을 확인하던 도중 EC2가 다운되는 증상이 있었습니다. 원인을 분석해본 결과 games_detail와 teams를 merge를 통해 합치는 과정에서 데이터 용량이 너무 커서 서버가 다운되었습니다. 이에따라 games_detail의 데이터를 절반으로 조절하여 진항해였습니다.
 ---
 
+
+## 사용환경 및 라이브러리
+##### 환경
+<img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=Windows&logoColor=white"> <img src="https://img.shields.io/badge/Amazon EC2-FF9900.svg?style=for-the-badge&logo=Amazon EC2&logoColor=white"/> <img src="https://img.shields.io/badge/Python-3776AB.svg?style=for-the-badge&logo=Python3.8&logoColor=white"/> <img src="https://img.shields.io/badge/Jupyter-F37626.svg?style=for-the-badge&logo=Jupyter&logoColor=white"/> 
+
+##### 라이브러리
+<img src="https://img.shields.io/badge/Python-3776AB.svg?style=for-the-badge&logo=Python&logoColor=white"/> <img src="https://img.shields.io/badge/Streamlit-FF4B4B.svg?style=for-the-badge&logo=Streamlit&logoColor=white"/> <img src="https://img.shields.io/badge/pandas-150458.svg?style=for-the-badge&logo=pandas&logoColor=white"/> <img src="https://img.shields.io/badge/Plotly-3F4F75.svg?style=for-the-badge&logo=Plotly&logoColor=white"/> <img src="https://img.shields.io/badge/NumPy-013243.svg?style=for-the-badge&logo=NumPy&logoColor=white"/>
+---
 
 
 
