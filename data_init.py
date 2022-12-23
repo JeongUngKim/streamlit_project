@@ -36,15 +36,15 @@ df_teams = df_teams.rename(columns=rename_team)
 
  # 가공을 편하게 하기위해 df_games에 홈팀명,어웨이팀명 추가
 df_teams_home = df_teams.rename(columns={'팀ID':'홈팀ID'})
-new_data = pd.merge(df_games,df_teams_home).iloc[:,:-3].rename(columns={'팀약어':'홈팀'})
+new_data = pd.merge(df_games,df_teams_home, on = '홈팀ID').iloc[:,:-3].rename(columns={'팀약어':'홈팀'})
 df_teams_away = df_teams.rename(columns={'팀ID':'어웨이팀ID'})
-df_games=pd.merge(new_data,df_teams_away).iloc[:,:-3].rename(columns={'팀약어':'어웨이팀'})
+df_games=pd.merge(new_data,df_teams_away,on = '어웨이팀ID').iloc[:,:-3].rename(columns={'팀약어':'어웨이팀'})
 
-# # 가공을 편하게 하기 위해 df_platers에 팀명 추가
-# df_players=pd.merge(df_players,df_teams).iloc[:,0:4+1]
+# 가공을 편하게 하기 위해 df_platers에 팀명 추가
+df_players=pd.merge(df_players,df_teams,on='팀ID').iloc[:,0:4+1]
 
-# # 가공을 편하게 하기 위해 df_games_detail 에 날짜 추가
-# df_games_detail=pd.merge(df_games_detail,df_games).loc[:,:'경기날짜'].sort_values('경기날짜',ascending=False)
+# 가공을 편하게 하기 위해 df_games_detail 에 날짜 추가
+df_games_detail=pd.merge(df_games_detail,df_games,on='경기ID').loc[:,:'경기날짜'].sort_values('경기날짜',ascending=False)
 
-# # 가공을 편하게 하기위해 df_games_detail에 약어 추가
-# df_games_detail = pd.merge(df_games_detail,df_teams).iloc[:,:-3]
+# 가공을 편하게 하기위해 df_games_detail에 약어 추가
+df_games_detail = pd.merge(df_games_detail,df_teams,on='팀ID').iloc[:,:-3]
