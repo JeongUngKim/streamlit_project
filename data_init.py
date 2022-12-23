@@ -34,11 +34,11 @@ rename_team = {'TEAM_ID':'팀ID','ABBREVIATION':'팀약어','YEARFOUNDED':'팀�
                 'CITY':'연고지','ARENA':'홈구장'}
 df_teams = df_teams.rename(columns=rename_team)
 
-# # 가공을 편하게 하기위해 df_games에 홈팀명,어웨이팀명 추가
-# df_teams_home = df_teams.rename(columns={'팀ID':'홈팀ID'})
-# new_data = pd.merge(df_games,df_teams_home).iloc[:,:-3].rename(columns={'팀약어':'홈팀'})
-# df_teams_away = df_teams.rename(columns={'팀ID':'어웨이팀ID'})
-# df_games=pd.merge(new_data,df_teams_away).iloc[:,:-3].rename(columns={'팀약어':'어웨이팀'})
+ # 가공을 편하게 하기위해 df_games에 홈팀명,어웨이팀명 추가
+df_teams_home = df_teams.rename(columns={'팀ID':'홈팀ID'})
+new_data = pd.merge(df_games,df_teams_home).iloc[:,:-3].rename(columns={'팀약어':'홈팀'})
+df_teams_away = df_teams.rename(columns={'팀ID':'어웨이팀ID'})
+df_games=pd.merge(new_data,df_teams_away).iloc[:,:-3].rename(columns={'팀약어':'어웨이팀'})
 
 # # 가공을 편하게 하기 위해 df_platers에 팀명 추가
 # df_players=pd.merge(df_players,df_teams).iloc[:,0:4+1]
