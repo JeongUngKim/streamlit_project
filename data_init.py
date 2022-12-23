@@ -43,8 +43,8 @@ df_games=pd.merge(new_data,df_teams_away,on = '어웨이팀ID').iloc[:,:-3].rena
 # 가공을 편하게 하기 위해 df_platers에 팀명 추가
 df_players=pd.merge(df_players,df_teams,on='팀ID').iloc[:,0:4+1]
 
-# # 가공을 편하게 하기 위해 df_games_detail 에 날짜 추가
-# df_games_detail=pd.merge(df_games_detail,df_games,on='경기ID').loc[:,:'경기날짜'].sort_values('경기날짜',ascending=False)
+# 가공을 편하게 하기 위해 df_games_detail 에 날짜 추가
+df_games_detail=pd.merge(df_games_detail,df_games,on='경기ID').loc[:,:'경기날짜'].sort_values('경기날짜',ascending=False)
 
-# # 가공을 편하게 하기위해 df_games_detail에 약어 추가
-# df_games_detail = pd.merge(df_games_detail,df_teams,on='팀ID').iloc[:,:-3]
+# 가공을 편하게 하기위해 df_games_detail에 약어 추가
+df_games_detail = pd.merge(df_games_detail,df_teams,on='팀ID').iloc[:,:-3]
