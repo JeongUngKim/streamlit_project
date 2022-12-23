@@ -8,6 +8,7 @@
 ## 프로젝트 개발 과정
 #### 1. kaggle 에서 무료 데이터를 가져왔습니다.
 [NBA 데이터 다운로드](https://www.kaggle.com/datasets/nathanlauga/nba-games?resource=download&select=teams.csv)
+### Jupyter 사용
 
 #### 2. Jupyter notebook 을 통해 데이터를 가져와 이상이 없는지 확인합니다.
 ###### - 가져온 데이터에 밀림현상이 있어서 shift() 을 이용해 데이터를 재 가공합니다.
@@ -20,6 +21,8 @@
 
 #### 5. 가공한 데이터프레임에서 원하는 정보를 가져와 차트로 만듭니다.
 ###### - plotly.express.bar() 사용
+
+### Visual Studio Code 사용
 
 #### 6. visual studio code 를 이용한 streamlit 라이브러리를 통해 웹대시보드의 설계를 구상합니다.
 
