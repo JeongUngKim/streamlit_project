@@ -8,13 +8,14 @@ from matplotlib import font_manager, rc
 import numpy as np
 import plotly.graph_objects as go
 def player(player_name) :
-    plt.rcParams['axes.unicode_minus'] = False
-    if platform.system() == 'Linux':
-        rc('font', family='NanumGothic')
-    elif platform.system() == 'Windows':
-        path = "c:/Windows/Fonts/malgun.ttf"
-        font_name = font_manager.FontProperties(fname=path).get_name()
-        rc('font', family=font_name)
+    pass
+    # plt.rcParams['axes.unicode_minus'] = False
+    # if platform.system() == 'Linux':
+    #     rc('font', family='NanumGothic')
+    # elif platform.system() == 'Windows':
+    #     path = "c:/Windows/Fonts/malgun.ttf"
+    #     font_name = font_manager.FontProperties(fname=path).get_name()
+    #     rc('font', family=font_name)
 
     # # 데이터를 읽어온다.
     # # 선수 데이터

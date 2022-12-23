@@ -9,13 +9,14 @@ from matplotlib import font_manager, rc
 import plotly.express as px
 
 def team(team_name) :
-    plt.rcParams['axes.unicode_minus'] = False
-    if platform.system() == 'Linux':
-        rc('font', family='NanumGothic')
-    elif platform.system() == 'Windows':
-        path = "c:/Windows/Fonts/malgun.ttf"
-        font_name = font_manager.FontProperties(fname=path).get_name()
-        rc('font', family=font_name)
+    pass
+    # plt.rcParams['axes.unicode_minus'] = False
+    # if platform.system() == 'Linux':
+    #     rc('font', family='NanumGothic')
+    # elif platform.system() == 'Windows':
+    #     path = "c:/Windows/Fonts/malgun.ttf"
+    #     font_name = font_manager.FontProperties(fname=path).get_name()
+    #     rc('font', family=font_name)
     
     # # 팀의 데이터를 읽어온다.
     # df_teams = data_init.df_teams
