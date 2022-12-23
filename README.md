@@ -4,14 +4,10 @@
 ###### NBA 팀,선수 들의 데이터를 가져와 Streamlit 을 이용한 대쉬보드 만들기
 ---
 ### 사용환경
-<img alt="Html" src ="https://img.shields.io/badge/Windows-0078D6.svg.svg?
-&style=for-the-badge
-&logo=벳지내 글자
-&logoColor=white"/>
 <img src="https://img.shields.io/badge/Windows-0078D6.svg?&
-          style=flat
+          style=for-the-badge
           &logo=Windows
-          &logoColor=0078D6"/> 
+          &logoColor=white"/> 
 <img src="https://img.shields.io/badge/Amazon EC2-FF9900.svg?&
           style=flat
           &logo=Amazon EC2
