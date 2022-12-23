@@ -20,7 +20,7 @@ def home() :
     st.dataframe(data_init.df_games_detail.head())
     st.error('games_details 에 데이터용량이 프리티어 버전 EC2서버에서 이용하기에는 너무 커 절반만 사용하였습니다.')
 
-    st.subheader('아쉬운점')
+    st.subheader('개선점')
     st.text('데이터의 밀림 현상이 있어 수정을 진행하였고,')
     st.text('선수의 정보를 입력하면 포지션을 알려주는 머신러닝을 개발하고 싶었으나')
     st.text('받아온 데이터가 비어있는 경우도 많았고 있는 데이터에서는 각 포지션별로 편차가 크지 않아')
