@@ -3,7 +3,7 @@ import pandas as pd
 df_teams = pd.read_csv('data/teams.csv')
 df_games = pd.read_csv('data/games.csv')
 df_players = pd.read_csv('data/players.csv')
-df_games_detail = pd.read_csv('data/games_details.csv',low_memory = False)
+df_games_detail = pd.read_csv('data/games_details_half.csv',low_memory = False)
 
 df_teams = df_teams.loc[:,['TEAM_ID','ABBREVIATION','YEARFOUNDED','CITY','ARENA']]
 df_games = df_games.loc[:,['GAME_DATE_EST','GAME_ID','HOME_TEAM_ID','PTS_home','AST_home','REB_home','TEAM_ID_away','PTS_away','AST_away','REB_away','HOME_TEAM_WINS']]
