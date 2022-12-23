@@ -3,8 +3,7 @@ import pandas as pd
 df_teams = pd.read_csv('data/teams.csv')
 df_games = pd.read_csv('data/games.csv')
 df_players = pd.read_csv('data/players.csv')
-# ec2 에서 작동하지 않아 half 로 읽어왔습니다.
-#df_games_detail = pd.read_csv('data/games_details.csv',low_memory = False)
+# 기존 데이터 오류로 half 만 가져왔다.
 df_games_detail = pd.read_csv('data/games_details_half.csv',low_memory = False)
 
 df_teams = df_teams.loc[:,['TEAM_ID','ABBREVIATION','YEARFOUNDED','CITY','ARENA']]
@@ -49,5 +48,4 @@ df_players=pd.merge(df_players,df_teams,on='팀ID').iloc[:,0:4+1]
 df_games_detail=pd.merge(df_games_detail,df_games,on='경기ID').loc[:,:'경기날짜'].sort_values('경기날짜',ascending=False)
 
 # 가공을 편하게 하기위해 df_games_detail에 약어 추가
-pd.merge(df_games_detail,df_teams[['팀ID','팀약어']],on='팀ID')
-#df_games_detail = pd.merge(df_games_detail,df_teams[['팀ID','팀약어']],on='팀ID').iloc[:,:-3]
+df_games_detail = pd.merge(df_games_detail,df_teams,on='팀ID').iloc[:,:-3]
