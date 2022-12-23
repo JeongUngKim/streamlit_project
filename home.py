@@ -18,7 +18,7 @@ def home() :
     st.dataframe(data_init.df_games.head())
     st.text('games_detail')
     st.dataframe(data_init.df_games_detail.head())
-    st.error('games_details 에 데이터용량이 EC2 서버에서 이용하기에는 너무 커 절반만 사용하였습니다.')
+    st.error('games_details 에 데이터용량이 프리티어 버전 EC2서버에서 이용하기에는 너무 커 절반만 사용하였습니다.')
 
     st.subheader('아쉬운점')
     st.text('데이터의 밀림 현상이 있어 수정을 진행하였고,')
