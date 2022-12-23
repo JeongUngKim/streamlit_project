@@ -198,32 +198,37 @@ def player(player_name) :
                         
                     #2점슛
                     st.subheader('2점')
-                    chart_offense_data_date_2_point = px.bar(offense_data_date,x=np.arange(offense_data_date.count()[0]),y=['2점슛','경기평균2점'] ,barmode='group',labels={'x':'경기수'})
+                    slider_2=st.slider('최근 2점 데이터 경기수를 지정해주세요.',min_value= 5 , max_value=int(offense_data_date.count()[0]) , value= 10)
+                    chart_offense_data_date_2_point = px.bar(offense_data_date.head(slider_2),x=np.arange(offense_data_date.head(slider_2).count()[0]),y=['2점슛','경기평균2점'] ,barmode='group',labels={'x':'경기수'})
                     
                     st.plotly_chart(chart_offense_data_date_2_point)
                     st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
                 if '3점슛' in multiselectbox_list :    
                     # 3점슛
                     st.subheader('3점')
-                    chart_offense_data_date_3_point = px.bar(offense_data_date,x=np.arange(offense_data_date.count()[0]),y=['3점슛','경기평균3점'] ,barmode='group',labels={'x':'경기수'})
+                    slider_3=st.slider('최근 3점 데이터 경기수를 지정해주세요.',min_value= 5 , max_value=int(offense_data_date.count()[0]) , value= 10)
+                    chart_offense_data_date_3_point = px.bar(offense_data_date.head(slider_3),x=np.arange(offense_data_date.head(slider_3).count()[0]),y=['3점슛','경기평균3점'] ,barmode='group',labels={'x':'경기수'})
                     st.plotly_chart(chart_offense_data_date_3_point)
                     st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
                 if '자유투' in multiselectbox_list :    
                     #자유투
                     st.subheader('자유투')
-                    chart_offense_data_date_free_point = px.bar(offense_data_date,x=np.arange(offense_data_date.count()[0]),y=['자유투','경기평균자유투'] ,barmode='group',labels={'x':'경기수'})
+                    slider_f=st.slider('최근 자유투 데이터 경기수를 지정해주세요.',min_value= 5 , max_value=int(offense_data_date.count()[0]) , value= 10)
+                    chart_offense_data_date_free_point = px.bar(offense_data_date.head(slider_f),x=np.arange(offense_data_date.head(slider_f).count()[0]),y=['자유투','경기평균자유투'] ,barmode='group',labels={'x':'경기수'})
                     st.plotly_chart(chart_offense_data_date_free_point)
                     st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
                 if '리바운드' in multiselectbox_list :    
                         #리바
                     st.subheader('리바운드')
-                    chart_offense_data_date_re = px.bar(offense_data_date,x=np.arange(offense_data_date.count()[0]),y=['리바운드','경기평균리바운드'] ,barmode='group',labels={'x':'경기수'})
+                    slider_r=st.slider('최근 리바운드 데이터 경기수를 지정해주세요.',min_value= 5 , max_value=int(offense_data_date.count()[0]) , value= 10)
+                    chart_offense_data_date_re = px.bar(offense_data_date.head(slider_r),x=np.arange(offense_data_date.head(slider_r).count()[0]),y=['리바운드','경기평균리바운드'] ,barmode='group',labels={'x':'경기수'})
                     st.plotly_chart(chart_offense_data_date_re)
                     st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
                 if '어시스트' in multiselectbox_list :    
                     #어시
                     st.subheader('어시스트')
-                    chart_offense_data_date_assist = px.bar(offense_data_date,x=np.arange(offense_data_date.count()[0]),y=['어시스트','경기평균어시스트'] ,barmode='group',labels={'x':'경기수'})
+                    slider_r=st.slider('최근 어시 데이터 경기수를 지정해주세요.',min_value= 5 , max_value=int(offense_data_date.count()[0]) , value= 10)
+                    chart_offense_data_date_assist = px.bar(offense_data_date.head(slider_r),x=np.arange(offense_data_date.head(slider_r).count()[0]),y=['어시스트','경기평균어시스트'] ,barmode='group',labels={'x':'경기수'})
                     st.plotly_chart(chart_offense_data_date_assist)
                     st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
 
@@ -231,25 +236,29 @@ def player(player_name) :
                     
                     #가로채기
                     st.subheader('가로채기')
-                    chart_defense_data_date_st = px.bar(defense_data_date,x=np.arange(offense_data_date.count()[0]),y=['가로채기','경기평균가로채기'] ,barmode='group',labels={'x':'경기수'})
+                    slider_s=st.slider('최근 가로채기 데이터 경기수를 지정해주세요.',min_value= 5 , max_value=int(offense_data_date.count()[0]) , value= 10)
+                    chart_defense_data_date_st = px.bar(defense_data_date.head(slider_s),x=np.arange(offense_data_date.head(slider_s).count()[0]),y=['가로채기','경기평균가로채기'] ,barmode='group',labels={'x':'경기수'})
                     st.plotly_chart(chart_defense_data_date_st)
                     st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
                 if '블락' in multiselectbox_list :   
                     #블락
                     st.subheader('블락')
-                    chart_defense_data_date_bk = px.bar(defense_data_date,x=np.arange(offense_data_date.count()[0]),y=['블락','경기평균블락'] ,barmode='group',labels={'x':'경기수'})
+                    slider_b=st.slider('최근 블락 데이터 경기수를 지정해주세요.',min_value= 5 , max_value=int(offense_data_date.count()[0]) , value= 10)
+                    chart_defense_data_date_bk = px.bar(defense_data_date.head(slider_b),x=np.arange(offense_data_date.head(slider_b).count()[0]),y=['블락','경기평균블락'] ,barmode='group',labels={'x':'경기수'})
                     st.plotly_chart(chart_defense_data_date_bk)
                     st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
                 if '턴오버' in multiselectbox_list :       
                     #턴오버
                     st.subheader('턴오버')
-                    chart_defense_data_date_to = px.bar(defense_data_date,x=np.arange(offense_data_date.count()[0]),y=['턴오버','경기평균턴오버'] ,barmode='group',labels={'x':'경기수'})
+                    slider_t=st.slider('최근 턴오버 데이터 경기수를 지정해주세요.',min_value= 5 , max_value=int(offense_data_date.count()[0]) , value= 10)
+                    chart_defense_data_date_to = px.bar(defense_data_date.head(slider_t),x=np.arange(offense_data_date.head(slider_t).count()[0]),y=['턴오버','경기평균턴오버'] ,barmode='group',labels={'x':'경기수'})
                     st.plotly_chart(chart_defense_data_date_to)
                     st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
                 if '파울' in multiselectbox_list :       
                     #파울
                     st.subheader('파울')
-                    chart_defense_data_date_p = px.bar(defense_data_date,x=np.arange(offense_data_date.count()[0]),y=['파울','경기평균파울'] ,barmode='group',labels={'x':'경기수'})
+                    slider_p=st.slider('최근 파울 데이터 경기수를 지정해주세요.',min_value= 5 , max_value=int(offense_data_date.count()[0]) , value= 10)
+                    chart_defense_data_date_p = px.bar(defense_data_date.head(slider_p),x=np.arange(offense_data_date.head(slider_p).count()[0]),y=['파울','경기평균파울'] ,barmode='group',labels={'x':'경기수'})
                     st.plotly_chart(chart_defense_data_date_p)
                     st.info('자세히 보고싶은 부분을 좌클릭으로 영역 지정 해주세요.')
 
