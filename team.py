@@ -102,7 +102,7 @@ def team(team_name) :
                     st.dataframe(data_home.iloc[:,[11,0,3,4,5,12,7,8,9,10]].sort_values('경기날짜',ascending=False))
                     
                     if data_home.empty == False :
-                        data_home = data_home.mean(numeric_only=None)
+                        data_home = data_home.iloc[:,1:10+1].mean()
                         data_home['어웨이승리'] = 1 - data_home['홈팀승리여부']
                         fig_home = plt.figure()
                         plt.subplot(2,2,1)
@@ -187,7 +187,8 @@ def team(team_name) :
                     st.dataframe(data_away.iloc[:,[11,0,3,4,5,12,7,8,9,10]].sort_values('경기날짜',ascending=False))
 
                     if data_away.empty == False :
-                        data_away = data_away.mean(numeric_only=None)
+                        
+                        data_away = data_away.iloc[:,1:10+1].mean()
                         data_away['어웨이승리'] = 1 - data_away['홈팀승리여부']
                         fig_away = plt.figure()
                         plt.subplot(2,2,1)

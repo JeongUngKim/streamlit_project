@@ -3,6 +3,8 @@ import pandas as pd
 df_teams = pd.read_csv('data/teams.csv')
 df_games = pd.read_csv('data/games.csv')
 df_players = pd.read_csv('data/players.csv')
+# ec2 에서 작동하지 않아 half 로 읽어왔습니다.
+#df_games_detail = pd.read_csv('data/games_details.csv',low_memory = False)
 df_games_detail = pd.read_csv('data/games_details_half.csv',low_memory = False)
 
 df_teams = df_teams.loc[:,['TEAM_ID','ABBREVIATION','YEARFOUNDED','CITY','ARENA']]
