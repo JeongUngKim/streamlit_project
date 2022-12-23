@@ -5,37 +5,34 @@
 ---
 ### 사용환경
 <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=Windows&logoColor=white">
-<img src="https://img.shields.io/badge/Windows-0078D6.svg?&
-          style=for-the-badge
-          &logo=Windows
-          &logoColor=white"/> 
-<img src="https://img.shields.io/badge/Amazon EC2-FF9900.svg?&
+ 
+<img src="https://img.shields.io/badge/Amazon EC2-FF9900.svg?
           style=flat
           &logo=Amazon EC2
           &logoColor=FF9900"/>           
-<img src="https://img.shields.io/badge/Python-3776AB.svg?&
+<img src="https://img.shields.io/badge/Python-3776AB.svg?
           style=flat
           &logo=Python
           &logoColor=3776AB"/> 
 ---
 ### 라이브러리
-<img src="https://img.shields.io/badge/Python-3776AB.svg?&
+<img src="https://img.shields.io/badge/Python-3776AB.svg?
           style=flat
           &logo=Python
           &logoColor=3776AB"/> 
-<img src="https://img.shields.io/badge/Streamlit-FF4B4B.svg?&
+<img src="https://img.shields.io/badge/Streamlit-FF4B4B.svg?
           style=flat
           &logo=Streamlit
           &logoColor=FF4B4B"/>
-<img src="https://img.shields.io/badge/pandas-150458.svg?&
+<img src="https://img.shields.io/badge/pandas-150458.svg?
           style=flat
           &logo=pandas
           &logoColor=150458"/>
-<img src="https://img.shields.io/badge/Plotly-3F4F75.svg?&
+<img src="https://img.shields.io/badge/Plotly-3F4F75.svg?
           style=flat
           &logo=Plotly
           &logoColor=3F4F75"/>
-<img src="https://img.shields.io/badge/NumPy-013243.svg?&
+<img src="https://img.shields.io/badge/NumPy-013243.svg?
           style=flat
           &logo=NumPy
           &logoColor=013243"/>
