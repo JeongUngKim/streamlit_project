@@ -1,61 +1,62 @@
+from PIL import Image
 def team_url(team_name) :
     if team_name == 'ATL' :
-        return 'https://w.namu.la/s/766b9434f75a90ea1d56a94acc18b4efb31ccafaa99947996b1fe2f1106886bd899118cea83fab6ce0891fbf5e37b164eef653cc189bfd2587a00901cd846ae618cdaa002f983e76ef372fd13805cca9bb84bd98d0e989275e8c963efc2d62bb'
+        return Image.open('image/atl.png')
     elif team_name == 'BOS' :
-        return 'https://w.namu.la/s/e9459c8a6ba227dd5f71be25fa6cab40b6d4b1e67a9ed0e03373da8dc81289b2cefdac558cda43f9d56baa028f63280558795bb4cbbe451a389c917c18ca500f5cb14256c8ee043511408d88d81683a7698ced7badcd2a934a96ef8705a1b10c'
+        return Image.open('image/bos.png') 
     elif team_name =='NOP' :
-        return 'https://w.namu.la/s/42e2f92175a31f700ba64f0c91ff2d05cc3b90c3fb5fd7fbffc29f8fdd2358fcd21d2bf5eb2604fe6d8fd9803d28bb2444c8ddfb7bb8c4b473560c592896e04d18b2fe647a553a35455b76d9f98b7e3e38b8056b7208cb7b3a6a0e84506c9a5b71388aa094bd3be665f0f192dd12ef90'
+        return Image.open('image/nop.png')
     elif team_name == 'CHI' :
-        return 'https://w.namu.la/s/d2aa61176edbf42acd0aecb8e598a8c4becbcec27b9ff02950bf1b552acfd53bcf87b4fadf7b40b07ee8b1f4f1c4161bae924a9b2d8d85708d9403f81af3b6a3b9f49e379b36ac7f0cac9a726b4ddada8a70a64dfc48399fdbe2190aa5ff7cae'
+        return Image.open('image/chi.png')
     elif team_name == 'DAL' :
-        return 'https://w.namu.la/s/e53105e109deaa8f9ba6319212df8907e508cf7dcde178c25f6f7497b11c9dbad17e731728b27c6a2f789167eb8c9ed4015992839ffed94662faddb0d292359a765e953049359350f6496f4425a59055c8dadfd539583b30b307c1a2fdcab468ee78cf2d3edf0475ae905bc2c5d72411'
+        return Image.open('image/dal.png')
     elif team_name == 'DEN' :
-        return 'https://w.namu.la/s/02718e3e4bc339370a95287f40fadc3fccfabde5a3e69fd5677b102a3ea264d95e3b25b67b134b677bd63549055af764ea39ae9d62819a501f905009b5c6fe26962a52448170dda83f13a16f51ebe42db66122577b05a63296f2bcb013979e0aaab980d7fde171d38f16bcd739421059'
+        return Image.open('image/den.png')
     elif team_name == 'HOU' :
-        return 'https://w.namu.la/s/78f17a305dcd4e0a352eca9aab88e6ce82a7f827f705340800fdba361e90f792b288d6498a53dd56ea08d7c541efdf9fc19966b6d9e1676e05f0c3aed0664b8056a9b6fb5fc0ee9d8a2086de02a7c095a588c1aad98140f815efb46d66550f0baacf047b77cf845bef0333416517e73b'
+        return Image.open('image/hou.png')
     elif team_name == 'LAC' :
-        return 'https://w.namu.la/s/4a814fca9208c43cb43020fb7fb7d99b000d7335d6a1bf5d88238cc102102c10c1a50d01521804f890910a53e8b005e19f3a2d724cd2731ac53e904408970ac8d11a784fdc852031536585f7d7dfe9799735c68b7f55851f6260cafb1d6e2069'
+        return Image.open('image/lac.png')
     elif team_name == 'LAL' :
-        return 'https://w.namu.la/s/69a1cbd17c87eb057722465d5bbd5d72f854024cd16255664db16a5279b97351974490e505cf0078b3141b0dd7ed22c401e020fe3d8755d118dabfd6ec1d542ec1d61d386ca4f003e0ac383ecd8d09b3af279f4410b0cfbc725d231d6f73684bb5b5ad34db3c1eea00f4cad309d9a0a0'
+        return Image.open('image/lal.png')
     elif team_name =='MIA' :
-        return 'https://w.namu.la/s/1b39c3549b0597ce9c94a6456d4888401f5eabf4dbfdd6069a39fe16793213ea163435557b4253a40db2bca60e24c5aab7746c34facbe0b6ba673c0500ad964b39b60ca869a58f0165a5da7a05fbba658418b167838ca324530a91978f18c4e2f0df611fd6e2ec339c869ddbcf34ccfe'
+        return Image.open('image/mia.png')
     elif team_name =='MIL' :
-        return 'https://w.namu.la/s/a3aa9e4c92ae9e58074fe21d6f0910a5d2b9d0f7b2c5935ce8a275be9049e4caba86623ff660d3475c66c4c45bfcaf20c920aa3dd256676f25ac0f41e1d9cfac3b53bb1bf3c3a27d457fe38216104a3a15b59446a07b2d2062127ce35e6cbd4c3b6bde6af06b36f54f2e248e6568b1d0'
-    elif team_name == 'MIL' :
-        return 'https://w.namu.la/s/a07d6d4d1448222925e3891c28eed35f6cde0f3af3c179bfda1103cbb5c8a2dd402c9388a2ee2927e5f4485d055c7b64c1c70e8e728264fc8b8115da3cf37c49a614d5f7504f8d50e2e44c960d7083df9fa7451cdababd8524b012acf63e5a8bb7c020dbdbc5df0eab861c7409036e09'
+        return Image.open('image/mil.png')
+    elif team_name == 'MIN' :
+        return Image.open('image/min.png')
     elif team_name == 'BKN' :
-        return 'https://w.namu.la/s/a96a13cebe4efd6ebc53aace1c5cfa6ed44aa6a51cdafdf4819921b4d69c981c52abd75787ea6ef8fb34e639d6103f8df1022a7437fca486f37b46946a7cb9e0127125b1e8ca1532e5041f8a445601452837bc7494169f7214204d9a9c57efb2'
+        return Image.open('image/bkn.png')
     elif team_name =='NYK' :
-        return 'https://w.namu.la/s/06e54d18b93ba6cf1ed9a4d8f1601bf143eb02f2348c46613db8644920ac1065b1631776f0801d17c13bf4a100821df1d0909ef16e252f33cc1bf9814d006fc7014bb7642100b1aeb468a6f74b4fb463679ac6590c5ebb13769cb856418ce2f4'
+        return Image.open('image/nyk.png')
     elif team_name == 'ORL' :
-        return 'https://w.namu.la/s/88681833a8b52c5e7014be55d9ad78c8b0fb9d3ee0b841f78a4dbb02b5b32fe4b4524f5eca78b876dba9f60621da5ff1dea34c0a07b5bce552fdced4f6543c8edb115e10839e838c06f3cf04daa73df3b8bc6d674974d0d01c5cb55319c9e10314299f627fe14372ac43005911e7901a'
+        return Image.open('image/orl.png')
     elif team_name =='IND' :
-        return 'https://w.namu.la/s/83957b0894683baffd785459c3711d7e2912f2e81fb796f7bc08ae60c583db4a8180046b85c631dbb3200fc2e5c8f893e9e94fc84c937c9e9b1940b24b8e8a9fbb7d3741db2cea72195855d125a599c480b1c6d55b170f4ee37e386913149a8f8646ec37c025ad7e7642560ee146580d'
+        return Image.open('image/ind.png')
     elif team_name =='PHI' :
-        return 'https://w.namu.la/s/412b2bef05eb3f2bb89088b6bc5c74c51645b067ca32df6dc6e7c2772fbc17d6dd227ebf34a0b087a9bd7b1d7b172e0792d02523e1ee2401df23ac7c0ea48806260fa42f591b56dabfa636e978e8203e6d0fa2f2f12cf513fa77d03ec87f5a8a'
+        return Image.open('image/phi.png')
     elif team_name == 'PHX' :
-        return 'https://w.namu.la/s/470b5a9227c2b50873bc32dd8057c102721e4ba3c2936e71e08f6534309d21174d0ac6e1da842ccac3956a30ba551fe45fe00c0e05ef8369c8610137ac7344ebfc0475d7ae6bb8d28107b34a41dbe1981836fe50dd7787f7f54bfdc5e60343d7'
+        return Image.open('image/phx.png')
     elif team_name == 'POR' :
-        return 'https://w.namu.la/s/2ca294545d3781f1e06b90d9001f8d76cc5dbea66fa884893604451489d2098b63f86dbb9004226f430b9ecfca0f85b50250300585db9c2d1b217f5335d7b38e7e79f9afe8cf6dd0d25759fa027a03b8a4c6af486dacd6a9fbc85d75e17767a2'
+        return Image.open('image/por.png')
     elif team_name == 'SAC' :
-        return 'https://w.namu.la/s/91df871ed94b280e91ae52bee8e1ca6dd115f121b97b94b7ff99b4753f621f3ef19676077d378c7ff9248f40f97b061c9fdcf3b35a044e2894f6ab5bdbef8e25a9f593378ada1bbc41e2db36be559984c130aedd43277c87dd51c01ad5245a2d'
+        return Image.open('image/sac.png')
     elif team_name =='SAS' :
-        return 'https://w.namu.la/s/c40b2aa2142bf8332e5534069da61b56f255b06394d1cf27c06b6c5c81f5368dabc0d8e3994f329c5a3ae1a929fa533d68bbac574bb24125e3d21437274c15f072ea41114df43b0b1f9ff4e362a1c9b728cf60f44d0a1191392b88144f3c9e8f'
+        return Image.open('image/sas.png')
     elif team_name =='OKC' :
-        return 'https://w.namu.la/s/8fdfbc5e7dac8781a5cbd74e21b2591a430b96c05b1f196ff19448eda2c791c3ebe07b3c32018b063a2907b32f5016dea910c5f75fbf0094aac0579091615dcb3eeaec33e46e920f1722fe512f1de203b35ab2aabfe25d30ce1d61b0029289ef23e8a80f117376c3291c83f8aa1392bf'
+        return Image.open('image/okc.png')
     elif team_name == 'TOR' :
-        return 'https://w.namu.la/s/e31f55a0835126cafa0ba293d44fc262867bf43eff4f09f2eb61ae9aaabf856aeeb091abec079c8479be7c0459a6c5bb30965de8ea93234c0805517ae0b733ed4afe2e0005c94714de9b5f69d5976a3cfc37257a56ca3250ebf398336f15f828'
+        return Image.open('image/tor.png')
     elif team_name == 'UTA' :
-        return 'https://w.namu.la/s/b3797787fd875f1b31090df3932a537f954516f12fc199229c4709c72c8587179480bb2d5fb4c8e4b128d2e594c3059fc0d128acc41e8f9e4faa405bcddc44d02181fc444b4142a6350b86d5ef9100eb1cc9913c5f349b52bb609ae4cc10236a'
+        return Image.open('image/uta.png')
     elif team_name == 'MEM' :
-        return 'https://w.namu.la/s/ec9078a473b5de9acde2cabeaf4fa5b06363067980ffc014f32fbdf42a31a6f062d065b4233e225e4dc55ddef99dd0498ce486bf02ab9dfb43a114f9058580f510995a745a363db6a8bf06841621a159be760da363af06055161344e7b140b51'
+        return Image.open('image/mem.png')
     elif team_name == 'WAS' :
-        return 'https://w.namu.la/s/ed2caf67d3d2efd0c8b03a20c382425fe565aa95b7f98473f7c977523cf90afa74117cfc08fb22313a1919a6fedd006d4b9b9488da66f6937cc191eae7288a9f8b5bf16d75495116193f3738f8bc1399f33a723ae7eda7e95b10c4e72e6e121095a9e53163e5d2e1708393e97cfca86d'
+        return Image.open('image/was.png')
     elif team_name == 'DET' :
-        return 'https://w.namu.la/s/a16b96cd5e93c30a09a9ab15b31ee09cb14bf8f515b44ed826f9280a23c8fed427b745d51f7bbf3f73702a96f7cc8f9bd897aa95b81857e087a9e4d8fab78b54c86711626ff6361437dd3ac83e3bb2118b19acd2e05c327eff93a7361e842800'
+        return Image.open('image/det.png')
     elif team_name =='CHA' :
-        return 'https://w.namu.la/s/76354b9a0ec630938a2a42552de0925a113aec1dfffcde78b81eafc740ba24b1140f2563f2628663aeced5af4100cd5fa7ddf6930a8002a72340556a9f35dec40be2f4b57b3c111686bdb2a78757e7e3e427c447592f84e4b29becb096e7e71d4be0da604314a851c57276261381555e'
+        return Image.open('image/cha.png')
     elif team_name == 'CLE' :
-        return 'https://w.namu.la/s/c862089109cef0accd518196aaa2dc4b7f0a34ee20acc21b0bb506278a4ffd08500bd1665f8f65252812e9b0a1e841dbd56425496370f86a40cef4e5e516bf375c864c52e6b3be07cc171b2cd3dfdddfefe496da3c0a84c39619b01b735b1e4b'
+        return Image.open('image/cle.png')
     elif team_name == 'GSW' :
-        return 'https://w.namu.la/s/e57174d81c19810f2d3cb711bb6216fee5f1068acb0711e050971af39f3d76d79fd4025110d44920a6a4e6b0c05f6c2776ea06d0ef1e5f57590a0b6857d7db90b916eb46238ffe175a5e318dbc4ee63100ec686c29420acd1f54fa1f729ce6a33850f63b895507c5b379728081770c8f'
+        return Image.open('image/gsw.png')
