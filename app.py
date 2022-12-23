@@ -20,15 +20,13 @@ def main() :
     if choose == '팀' : 
         team_name = st.sidebar.selectbox('팀 정보',team_name_list)
         if team_name != '(팀을 선택해주세요)' :
-            
             team(team_name)
         else : 
             st.title('팀을 선택해주세요.')
     if choose =='선수' :
         player_name = st.sidebar.text_input('선수명(영어로만)',max_chars=100)
         if player_name != '' :
-            pass
-            #player(player_name)
+            player(player_name)
         elif player_name=='' :
             st.header('선수명을 입력해주세요.')
         else :

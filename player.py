@@ -16,17 +16,17 @@ def player(player_name) :
         font_name = font_manager.FontProperties(fname=path).get_name()
         rc('font', family=font_name)
 
-    # 데이터를 읽어온다.
-    # 선수 데이터
-    df_players = data_init.df_players
-    # 선수 스탯 데이터
-    df_games_detail = data_init.df_games_detail
-    # 팀정보
-    df_team = data_init.df_teams
-    # header
-    st.header('선수 정보')
-    # 선수명 확인
-    player_list = df_players[df_players['선수명'].str.contains(player_name,case=False)]['선수명'].unique().tolist()
+    # # 데이터를 읽어온다.
+    # # 선수 데이터
+    # df_players = data_init.df_players
+    # # 선수 스탯 데이터
+    # df_games_detail = data_init.df_games_detail
+    # # 팀정보
+    # df_team = data_init.df_teams
+    # # header
+    # st.header('선수 정보')
+    # # 선수명 확인
+    # player_list = df_players[df_players['선수명'].str.contains(player_name,case=False)]['선수명'].unique().tolist()
     
     # if len(player_list) > 1 :
        

@@ -17,23 +17,23 @@ def team(team_name) :
         font_name = font_manager.FontProperties(fname=path).get_name()
         rc('font', family=font_name)
     
-    # 팀의 데이터를 읽어온다.
-    df_teams = data_init.df_teams
-    df_games = data_init.df_games
-    df_games_detail = data_init.df_games_detail
-    # 팀정보 헤더 지정
-    st.header(team_name)
-    # 팀의 맞는 이미지 생성
-    st.subheader('로고')
-    st.image(tu.team_url(team_name),width=500)
-    # 사이드바에서 선택한 팀으로 정보
-    st.subheader('정보')
-    df_teams_info = df_teams.loc[df_teams['팀약어'] == team_name,'팀약어':]
-    st.dataframe(df_teams_info)
+    # # 팀의 데이터를 읽어온다.
+    # df_teams = data_init.df_teams
+    # df_games = data_init.df_games
+    # df_games_detail = data_init.df_games_detail
+    # # 팀정보 헤더 지정
+    # st.header(team_name)
+    # # 팀의 맞는 이미지 생성
+    # st.subheader('로고')
+    # st.image(tu.team_url(team_name),width=500)
+    # # 사이드바에서 선택한 팀으로 정보
+    # st.subheader('정보')
+    # df_teams_info = df_teams.loc[df_teams['팀약어'] == team_name,'팀약어':]
+    # st.dataframe(df_teams_info)
     
-    # 시즌별 성적보기
-    st.header('일자별 성적보기')
-    team_id = df_teams[df_teams['팀약어'] == team_name]['팀ID'].values[0]
+    # # 시즌별 성적보기
+    # st.header('일자별 성적보기')
+    # team_id = df_teams[df_teams['팀약어'] == team_name]['팀ID'].values[0]
     
     
     
