@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import team_url as tu
-#import data_init
+import data_init
 import matplotlib.pyplot as plt
 import numpy as np
 import platform
