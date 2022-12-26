@@ -78,7 +78,7 @@ def player(player_name) :
                         
                         # 그 경기 선수 평균 가져오기 
                         list_game_id = df_player_data_set['경기ID']
-                        game_player_mean = df_games_detail[(df_games_detail['경기ID'].isin(list_game_id)) & (df_games_detail['출전시간'].astype(str) > '0' )].groupby('경기날짜').mean().iloc[:,[0,3,4,5,6,7,8,9,10,11]]
+                        game_player_mean = df_games_detail[(df_games_detail['경기ID'].isin(list_game_id)) & (df_games_detail['출전시간'].astype(str) > '1:00' )].groupby('경기날짜').mean().iloc[:,[0,3,4,5,6,7,8,9,10,11]]
                         game_player_mean=game_player_mean.sort_values('경기날짜',ascending=False)
                         # end
 
@@ -176,7 +176,7 @@ def player(player_name) :
                     
                     # 그 경기 선수 평균 가져오기 
                     list_game_id = choose_team_player_data['경기ID']
-                    game_player_mean = df_games_detail[df_games_detail['경기ID'].isin(list_game_id)].groupby('경기날짜').mean().iloc[:,[0,3,4,5,6,7,8,9,10,11]]
+                    game_player_mean = df_games_detail[(df_games_detail['경기ID'].isin(list_game_id)) & (df_games_detail['출전시간'].astype(str) > '1:00' )].groupby('경기날짜').mean().iloc[:,[0,3,4,5,6,7,8,9,10,11]]
                     game_player_mean=game_player_mean.sort_values('경기날짜',ascending=False)
                     # end
 

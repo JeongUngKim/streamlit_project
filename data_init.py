@@ -49,3 +49,6 @@ df_games_detail=pd.merge(df_games_detail,df_games,on='경기ID').loc[:,:'경기�
 
 # 가공을 편하게 하기위해 df_games_detail에 약어 추가
 df_games_detail = pd.merge(df_games_detail,df_teams,on='팀ID').iloc[:,:-3]
+
+# 출전시간에 : 이 없는항목 추가하기
+df_games_detail.loc[df_games_detail['출전시간'].str.contains(':') == False,'출전시간'] = df_games_detail.loc[df_games_detail['출전시간'].str.contains(':') == False,'출전시간'] + ':00'
