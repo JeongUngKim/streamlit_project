@@ -57,7 +57,7 @@ def team(team_name) :
        
     # 홈 / 어웨이 선택
     selected = st.selectbox('홈/어웨이 선택',['홈','어웨이'])
-    list_selected_box = ['상세','득점','어시스트','리바운드','역대전적','선수 스탯'] 
+    list_selected_box = ['상세','득점','어시스트','리바운드','선수 스탯'] 
     df_games_home = df_games.loc[ (df_games['홈팀ID']==team_id) & (start_date<=df_games['경기날짜']) & (df_games['경기날짜']<=end_date),:]
     df_games_home = df_games_home.sort_values('경기날짜',ascending=False)      
     if df_games_home.empty :
@@ -96,46 +96,6 @@ def team(team_name) :
                 st.plotly_chart(recently_rebound_pig)
                 st.info('날짜별 팀의 리바운드 정보 입니다.')
                 
-            if '역대전적' in home_multi:
-                st.subheader('역대 홈 전적비교')
-                compare_home_team = st.selectbox('팀선택',team_name_list)
-                
-                if compare_home_team != '' and compare_home_team != team_name : 
-                    compare_team_id_home = df_teams[df_teams['팀약어'] == compare_home_team]['팀ID'].values[0]
-                    data_home = df_games[(df_games['홈팀ID'] ==team_id) & (df_games['어웨이팀ID'] ==compare_team_id_home)]
-                    st.dataframe(data_home.iloc[:,[11,0,3,4,5,12,7,8,9,10]].sort_values('경기날짜',ascending=False))
-                    
-                    if data_home.empty == False :
-                        data_home = data_home.iloc[:,1:10+1].mean()
-                        data_home['어웨이승리'] = 1 - data_home['홈팀승리여부']
-                        fig_home = plt.figure()
-                        plt.subplot(2,2,1)
-                        plt.pie(data_home[[9,10]],autopct='%.1f',startangle = 90)
-                        plt.title('홈팀 승률')
-                        plt.legend(['홈','어웨이'])
-                        
-                        plt.subplot(2,2,2)
-                        plt.pie(data_home[[2,6]],autopct='%.1f',startangle=90)
-                        plt.title('평균 득점')
-                        plt.legend(['홈','어웨이'])
-
-                        plt.subplot(2,2,3)
-                        plt.pie(data_home[[3,7]],autopct='%.1f',startangle=90)
-                        plt.title('평균 어시')
-                        plt.legend(['홈','어웨이'])
-
-                        plt.subplot(2,2,4)
-                        plt.pie(data_home[[4,8]],autopct='%.1f',startangle=90)
-                        plt.title('평균 리바운드')
-                        plt.legend(['홈','어웨이'])
-                        st.pyplot(fig_home)
-                    else :
-                        st.title('')
-                elif compare_home_team == team_name :
-                    st.error('같은 팀 입니다. 다른 팀을 선택해주세요.')
-                else : 
-                    st.error('팀을 선택해주세요')
-
                 
             if '선수 스탯' in home_multi :
                 st.subheader('홈경기 선수 스탯')
@@ -147,6 +107,45 @@ def team(team_name) :
             
             else :
                 st.write('')
+            st.subheader('역대 홈 전적비교')
+            compare_home_team = st.selectbox('팀선택',team_name_list)
+            
+            if compare_home_team != '' and compare_home_team != team_name : 
+                compare_team_id_home = df_teams[df_teams['팀약어'] == compare_home_team]['팀ID'].values[0]
+                data_home = df_games[(df_games['홈팀ID'] ==team_id) & (df_games['어웨이팀ID'] ==compare_team_id_home)]
+                st.dataframe(data_home.iloc[:,[11,0,3,4,5,12,7,8,9,10]].sort_values('경기날짜',ascending=False))
+                
+                if data_home.empty == False :
+                    data_home = data_home.iloc[:,1:10+1].mean()
+                    data_home['어웨이승리'] = 1 - data_home['홈팀승리여부']
+                    fig_home = plt.figure()
+                    plt.subplot(2,2,1)
+                    plt.pie(data_home[[9,10]],autopct='%.1f',startangle = 90)
+                    plt.title('홈팀 승률')
+                    plt.legend(['홈','어웨이'])
+                    
+                    plt.subplot(2,2,2)
+                    plt.pie(data_home[[2,6]],autopct='%.1f',startangle=90)
+                    plt.title('평균 득점')
+                    plt.legend(['홈','어웨이'])
+
+                    plt.subplot(2,2,3)
+                    plt.pie(data_home[[3,7]],autopct='%.1f',startangle=90)
+                    plt.title('평균 어시')
+                    plt.legend(['홈','어웨이'])
+
+                    plt.subplot(2,2,4)
+                    plt.pie(data_home[[4,8]],autopct='%.1f',startangle=90)
+                    plt.title('평균 리바운드')
+                    plt.legend(['홈','어웨이'])
+                    st.pyplot(fig_home)
+                else :
+                    st.title('')
+            elif compare_home_team == team_name :
+                st.error('같은 팀 입니다. 다른 팀을 선택해주세요.')
+            else : 
+                st.error('팀을 선택해주세요')
+
 
         elif selected =='어웨이' :
 
@@ -182,47 +181,7 @@ def team(team_name) :
                 st.plotly_chart(recently_rebound_pig)
                 st.info('날짜별 팀의 리바운드 정보 입니다.')
            
-            if '역대전적' in away_multi :
-                st.subheader('역대 어웨이 전적비교')
-                compare_away_team = st.selectbox('팀 선택',team_name_list)
-            
-                if compare_away_team != '' and compare_away_team != team_name: 
-                    compare_team_id_away = df_teams[df_teams['팀약어'] == compare_away_team]['팀ID'].values[0]
-                    data_away=df_games[(df_games['홈팀ID'] == compare_team_id_away) & (df_games['어웨이팀ID'] ==team_id)]
-                    st.dataframe(data_away.iloc[:,[11,0,3,4,5,12,7,8,9,10]].sort_values('경기날짜',ascending=False))
-
-                    if data_away.empty == False :
-                        
-                        data_away = data_away.iloc[:,1:10+1].mean()
-                        data_away['어웨이승리'] = 1 - data_away['홈팀승리여부']
-                        fig_away = plt.figure()
-                        plt.subplot(2,2,1)
-                        plt.pie(data_away[[10,9]],autopct='%.1f',startangle = 90)
-                        plt.title('어웨이팀 승률')
-                        plt.legend(['어웨이','홈'])
-                        
-                        plt.subplot(2,2,2)
-                        plt.pie(data_away[[6,2]],autopct='%.1f',startangle=90)
-                        plt.title('평균 득점')
-                        plt.legend(['어웨이','홈'])
-
-                        plt.subplot(2,2,3)
-                        plt.pie(data_away[[7,3]],autopct='%.1f',startangle=90)
-                        plt.title('평균 어시')
-                        plt.legend(['어웨이','홈'])
-
-                        plt.subplot(2,2,4)
-                        plt.pie(data_away[[8,4]],autopct='%.1f',startangle=90)
-                        plt.title('평균 리바운드')
-                        plt.legend(['어웨이','홈'])
-                        st.pyplot(fig_away)
-                    else :
-                        st.title('')
-                elif compare_away_team == team_name :
-                    st.error('같은 팀 입니다. 다른 팀을 선택해주세요.')
-                else : 
-                    st.error('팀을 선택해주세요')
-
+               
             if '선수 스탯' in away_multi :
                 st.subheader('어웨이경기 선수 스탯')
                 home_away_id = df_games_away['경기ID']  
@@ -231,8 +190,48 @@ def team(team_name) :
                 st.info('선수의 자세한 스탯은 카테고리 - 선수 를 이용해주세요.')
             else :
                 st.write('')
+            st.subheader('역대 어웨이 전적비교')
+            compare_away_team = st.selectbox('팀 선택',team_name_list)
+        
+            if compare_away_team != '' and compare_away_team != team_name: 
+                compare_team_id_away = df_teams[df_teams['팀약어'] == compare_away_team]['팀ID'].values[0]
+                data_away=df_games[(df_games['홈팀ID'] == compare_team_id_away) & (df_games['어웨이팀ID'] ==team_id)]
+                st.dataframe(data_away.iloc[:,[11,0,3,4,5,12,7,8,9,10]].sort_values('경기날짜',ascending=False))
 
-    
+                if data_away.empty == False :
+                    
+                    data_away = data_away.iloc[:,1:10+1].mean()
+                    data_away['어웨이승리'] = 1 - data_away['홈팀승리여부']
+                    fig_away = plt.figure()
+                    plt.subplot(2,2,1)
+                    plt.pie(data_away[[10,9]],autopct='%.1f',startangle = 90)
+                    plt.title('어웨이팀 승률')
+                    plt.legend(['어웨이','홈'])
+                    
+                    plt.subplot(2,2,2)
+                    plt.pie(data_away[[6,2]],autopct='%.1f',startangle=90)
+                    plt.title('평균 득점')
+                    plt.legend(['어웨이','홈'])
+
+                    plt.subplot(2,2,3)
+                    plt.pie(data_away[[7,3]],autopct='%.1f',startangle=90)
+                    plt.title('평균 어시')
+                    plt.legend(['어웨이','홈'])
+
+                    plt.subplot(2,2,4)
+                    plt.pie(data_away[[8,4]],autopct='%.1f',startangle=90)
+                    plt.title('평균 리바운드')
+                    plt.legend(['어웨이','홈'])
+                    st.pyplot(fig_away)
+                else :
+                    st.title('')
+            elif compare_away_team == team_name :
+                st.error('같은 팀 입니다. 다른 팀을 선택해주세요.')
+            else : 
+                st.error('팀을 선택해주세요')
+
+
+
 
     
 
