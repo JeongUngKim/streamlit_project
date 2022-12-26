@@ -19,3 +19,5 @@ jobs:
           script: |
             cd streamlit_project
             git pull
+            ll
+            
