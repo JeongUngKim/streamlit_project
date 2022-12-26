@@ -14,6 +14,7 @@ def home() :
     df_teams = pd.read_csv('data/teams.csv',index_col=0)
     df_games = pd.read_csv('data/games.csv',index_col=0)
     df_games_detail = pd.read_csv('data/games_details.csv',low_memory = False,index_col=0)
+    df_players = pd.read_csv('data/players.csv',index_col=0)
     st.text('teams')
     
     st.dataframe(df_teams.head())
