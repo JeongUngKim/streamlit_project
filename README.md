@@ -35,7 +35,7 @@
 ---
 
 ## 프로젝트 주소
-[EC2 프로젝트 확인](http://ec2-3-39-251-194.ap-northeast-2.compute.amazonaws.com:8501/)
+[EC2 프로젝트 확인](http://3.35.219.90:8502/)
 
 [블로그 주소](https://mokokodevelop.tistory.com/category/%EA%B0%9C%EB%B0%9C/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8)
 
