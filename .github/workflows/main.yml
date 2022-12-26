@@ -1,4 +1,4 @@
-name: ec2 deploy
+name: ec2 deploy project
 on:
   push:
     branches:
@@ -10,7 +10,7 @@ jobs:
   
     steps:
       - uses: actions/checkout@v3
-      - name: ssh to ec2
+      - name: ssh to ec2_project
         uses: appleboy/ssh-action@master
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
