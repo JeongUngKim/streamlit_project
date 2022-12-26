@@ -68,17 +68,17 @@ def player(player_name) :
                 if start_date > end_date :
                     st.error('시작 날짜를 종료 날짜보다 전으로 설정해주세요.')
                 else :
-                    if df_player_data['경기날짜'].values[0] < start_date :
-                        st.error('경기정보가 없습니다.')
-                    else :
-                        df_player_data_set=df_player_data[( df_player_data['경기날짜'] >= start_date ) & (df_player_data['경기날짜'] <= end_date) ]
-                        
+                    
+                    df_player_data_set=df_player_data[( df_player_data['경기날짜'] >= start_date ) & (df_player_data['경기날짜'] <= end_date) ]
+                    if df_player_data_set.empty :
+                        st.error('데이터가 없습니다.')
+                    else :        
                         multiselectbox_list = ['상세','평균','2점슛', '3점슛', '자유투', '리바운드', '어시스트', '가로채기', '블락', '턴오버', '파울']
                         selected_player_data = st.multiselect('데이터 선택',multiselectbox_list)
                         
                         # 그 경기 선수 평균 가져오기 
                         list_game_id = df_player_data_set['경기ID']
-                        game_player_mean = df_games_detail[df_games_detail['경기ID'].isin(list_game_id)].groupby('경기날짜').mean().iloc[:,[0,3,4,5,6,7,8,9,10,11]]
+                        game_player_mean = df_games_detail[(df_games_detail['경기ID'].isin(list_game_id)) & (df_games_detail['출전시간'].astype(str) > '0' )].groupby('경기날짜').mean().iloc[:,[0,3,4,5,6,7,8,9,10,11]]
                         game_player_mean=game_player_mean.sort_values('경기날짜',ascending=False)
                         # end
 

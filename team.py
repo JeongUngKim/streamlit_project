@@ -53,19 +53,22 @@ def team(team_name) :
        'MIA', 'MIL', 'MIN', 'BKN', 'NYK', 'ORL', 'IND', 'PHI', 'PHX',
        'POR', 'SAC', 'SAS', 'OKC', 'TOR', 'UTA', 'MEM', 'WAS', 'DET',
        'CHA', 'CLE', 'GSW']
-    if df_games['경기날짜'][0] < start_date :
-           st.error('경기정보가 없습니다. 날짜를 조정해주세요. 가장 최근 데이터는 '+df_games['경기날짜'][0]+'입니다.')  
-    else :   
-        # 홈 / 어웨이 선택
-        selected = st.selectbox('홈/어웨이 선택',['홈','어웨이'])
-        list_selected_box = ['상세','득점','어시스트','리바운드','역대전적','선수 스탯']       
+             
+       
+    # 홈 / 어웨이 선택
+    selected = st.selectbox('홈/어웨이 선택',['홈','어웨이'])
+    list_selected_box = ['상세','득점','어시스트','리바운드','역대전적','선수 스탯'] 
+    df_games_home = df_games.loc[ (df_games['홈팀ID']==team_id) & (start_date<=df_games['경기날짜']) & (df_games['경기날짜']<=end_date),:]
+    df_games_home = df_games_home.sort_values('경기날짜',ascending=False)      
+    if df_games_home.empty :
+        st.error('데이터가 없습니다.')
+    else :    
         if selected == '홈' : 
             # 홈성적
             st.subheader('홈 성적')
             home_multi = st.multiselect('데이터 선택',list_selected_box)
             
-            df_games_home = df_games.loc[ (df_games['홈팀ID']==team_id) & (start_date<=df_games['경기날짜']) & (df_games['경기날짜']<=end_date),:]
-            df_games_home = df_games_home.sort_values('경기날짜',ascending=False)    
+                
             if '상세' in home_multi :
                 st.subheader('상세')
                 st.dataframe(df_games_home.iloc[:,[11,12,0,3,4,5,7,8,9]])
@@ -75,23 +78,21 @@ def team(team_name) :
                 
                 #득점 데이터
                 st.subheader('득점')
-                recently_game = st.slider('홈 경기 득점 경기 수',min_value=3,max_value=int(df_games_home['경기ID'].count()),value=7)
-                recently_point_pig = px.bar(df_games_home.head(recently_game),x='경기날짜',y=['홈팀점수','어웨이팀점수'],barmode='group')
+                recently_point_pig = px.bar(df_games_home,x='경기날짜',y=['홈팀점수','어웨이팀점수'],barmode='group')
                 st.plotly_chart(recently_point_pig)
                 st.info('날짜별 팀의 득점 정보 입니다.')
 
             if '어시스트' in home_multi :
                 #어시스트 데이터
                 st.subheader('어시스트')
-                recently_game = st.slider('홈 경기 어시스트 경기 수',min_value=3,max_value=int(df_games_home['경기ID'].count()),value=7)
-                recently_assist_pig = px.bar(df_games_home.head(recently_game),x='경기날짜',y=['홈팀어시','어웨이팀어시'],barmode='group')
+                recently_assist_pig = px.bar(df_games_home,x='경기날짜',y=['홈팀어시','어웨이팀어시'],barmode='group')
                 st.plotly_chart(recently_assist_pig)
                 st.info('날짜별 팀의 어시스트 정보 입니다.')
             if '리바운드' in home_multi :
                 #리바운드 데이터
                 st.subheader('리바운드')
-                recently_game = st.slider('최근 경기 리바운드 경기 수',min_value=3,max_value=int(df_games_home['경기ID'].count()),value=7)
-                recently_rebound_pig = px.bar(df_games_home.head(recently_game),x='경기날짜',y=['홈팀리바운드','어웨이팀리바운드'],barmode='group')
+                
+                recently_rebound_pig = px.bar(df_games_home,x='경기날짜',y=['홈팀리바운드','어웨이팀리바운드'],barmode='group')
                 st.plotly_chart(recently_rebound_pig)
                 st.info('날짜별 팀의 리바운드 정보 입니다.')
                 
@@ -162,22 +163,22 @@ def team(team_name) :
                 
                  #득점 데이터
                 st.subheader('득점')
-                recently_game = st.slider('어웨이 경기 득점 경기 수',min_value=3,max_value=int(df_games_away['경기ID'].count()),value=7)
-                recently_point_pig = px.bar(df_games_away.head(recently_game),x='경기날짜',y=['홈팀점수','어웨이팀점수'],barmode='group')
+               
+                recently_point_pig = px.bar(df_games_away,x='경기날짜',y=['홈팀점수','어웨이팀점수'],barmode='group')
                 st.plotly_chart(recently_point_pig)
                 st.info('날짜별 팀의 득점 정보 입니다.')
             if '어시스트' in away_multi :
                 #어시스트 데이터
                 st.subheader('어시스트')
-                recently_game = st.slider('어웨이 경기 어시스트 경기 수',min_value=3,max_value=int(df_games_away['경기ID'].count()),value=7)
-                recently_assist_pig = px.bar(df_games_away.head(recently_game),x='경기날짜',y=['홈팀어시','어웨이팀어시'],barmode='group')
+               
+                recently_assist_pig = px.bar(df_games_away,x='경기날짜',y=['홈팀어시','어웨이팀어시'],barmode='group')
                 st.plotly_chart(recently_assist_pig)
                 st.info('날짜별 팀의 어시스트 정보 입니다.')
             if '리바운드' in away_multi :    
                 #리바운드 데이터
                 st.subheader('리바운드')
-                recently_game = st.slider('어웨이 경기 리바운드 경기 수',min_value=3,max_value=int(df_games_away['경기ID'].count()),value=7)
-                recently_rebound_pig = px.bar(df_games_away.head(recently_game),x='경기날짜',y=['홈팀리바운드','어웨이팀리바운드'],barmode='group')
+              
+                recently_rebound_pig = px.bar(df_games_away,x='경기날짜',y=['홈팀리바운드','어웨이팀리바운드'],barmode='group')
                 st.plotly_chart(recently_rebound_pig)
                 st.info('날짜별 팀의 리바운드 정보 입니다.')
            
