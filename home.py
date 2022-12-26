@@ -27,7 +27,7 @@ def home() :
     st.text('games_details')
     
     st.dataframe(df_games_detail.head())
-    st.error('games_details 에 데이터용량이 프리티어 버전 EC2서버에서 이용하기에는 너무 커 절반만 사용하였습니다.')
+    
 
     
     
