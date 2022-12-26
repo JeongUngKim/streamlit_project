@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import team_url as tu
-import data_init
 import matplotlib.pyplot as plt
 import numpy as np
 import platform
@@ -20,9 +19,9 @@ def team(team_name) :
         rc('font', family=font_name)
     
     # 팀의 데이터를 읽어온다.
-    df_teams = data_init.df_teams
-    df_games = data_init.df_games
-    df_games_detail = data_init.df_games_detail
+    df_teams = pd.read_csv('data/teams.csv',index_col=0)
+    df_games = pd.read_csv('data/games.csv',index_col=0)
+    df_games_detail = pd.read_csv('data/games_details.csv',low_memory = False,index_col=0)
     # 팀정보 헤더 지정
     st.header(team_name)
     # 팀의 맞는 이미지 생성

@@ -2,9 +2,6 @@ import streamlit as st
 from home import home
 from team import team
 from player import player
-import matplotlib.pyplot as plt
-import platform
-from matplotlib import font_manager, rc
 
 
 def main() :

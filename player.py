@@ -1,5 +1,4 @@
 import streamlit as st
-import data_init
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
@@ -20,11 +19,11 @@ def player(player_name) :
 
     # 데이터를 읽어온다.
     # 선수 데이터
-    df_players = data_init.df_players
+    df_players = pd.read_csv('data/players.csv',index_col=0)
     # 선수 스탯 데이터
-    df_games_detail = data_init.df_games_detail
-    # 팀정보
-    df_team = data_init.df_teams
+    df_games_detail = pd.read_csv('data/games_details.csv',low_memory = False,index_col=0)
+   
+    
     # header
     st.header('선수 정보')
     # 선수명 확인
